@@ -1,6 +1,6 @@
 import { createApp } from 'vue'
 import './style.css'
 import App from './App.vue'
-import {useRouter,useRoute} from 'vue-router'
+import router from './route'
 
-createApp(App).mount('#app')
+createApp(App).use(router).mount('#app')
