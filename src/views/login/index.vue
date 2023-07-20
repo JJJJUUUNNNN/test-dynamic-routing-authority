@@ -1,70 +1,108 @@
 <template>
   <div class="login">
-    <el-form
-    ref="formRef"
-    :model="formData"
-    :rules="rules"
-    label-width="120px"
-    status-icon
-  >
-    <el-form-item label="用户名" prop="name">
-      <el-input v-model="formData.name" placeholder="请输入用户名" />
-    </el-form-item>
-    <el-form-item label="密码" prop="password">
-      <el-input v-model="formData.password" placeholder="请输入密码" />
-    </el-form-item>
-    <el-form-item>
-      <el-button type="primary" @click="handleLogin">
-        登录
-      </el-button>
-      <el-button @click="handleRegister">注册</el-button>
-    </el-form-item>
-  </el-form>
+    <form ref="formRef" :model="formData" :rules="rules" @submit="handleLogin">
+      <div class="form-item">
+        <label for="userName" 
+          >用户名:</label>
+          <input
+            ref="userNameRef"
+            name="userName"
+            type="text"
+            v-model="formData.userName"
+            placeholder="请输入用户名"
+            required
+          />
+        
+      </div>
+      <div class="form-item">
+        <label for="password"
+          >密码:</label>
+          <input
+            ref="passwordRef"
+            name="password"
+            type="password"
+            v-model="formData.password"
+            placeholder="请输入密码"
+            required
+            minlength="6"
+            maxlength="12"
+          />
+        
+      </div>
+      <span ref="errorRef" aria-live="polite"></span>
+      <div class="form-item">
+        <button>登录</button>
+        <button @click="handleRegister">注册</button>
+      </div>
+    </form>
   </div>
 </template>
 
 <script setup>
-import router from '../../route';
+import router from "@/route";
+import { useUserStore } from '@/store'
+
+const userSore=useUserStore()
 
 const formData = ref({
-  name: '',
-  password:''
-})
+  userName: "",
+  password: "",
+});
 
-const formRef=ref()
+const formRef = ref();
+const userNameRef = ref();
+const passwordRef = ref();
+const errorRef=ref()
 
-const rules=ref({
-  name:[{required:true,message:'用户名不能为空',trigger:'blur'}],
-  password:[{required:true,message:'密码不能为空',trigger:'blur'}]
-})
+const rules = ref({
+  name: [{ required: true, message: "用户名不能为空", trigger: "blur" }],
+  password: [{ required: true, message: "密码不能为空", trigger: "blur" }],
+});
 
-function handleLogin(){
-  if(!formRef.value){
-    return false
-  }
-  formRef.value.validate(validate=>{
-    if(validate){
-      console.log('666')
-      setTimeout(() => {
-        router.push('/home')
-      }, 1000);
-    }else{
-      return false
-    }
-  })
+function handleLogin(e) {
+  e.preventDefault()
+  userSore.setToken('token-test-key')
+  setTimeout(() => {
+    router.push("/home");
+  }, 1000);
 }
 
-function handleRegister(){
-  router.push('/register')
+function handleRegister() {
+  router.push("/register");
 }
 </script>
 
 <style lang="scss">
-.login{
-  width: 300px;
-  height: 200px;
+.login {
+  width: 250px;
+  height: 150px;
   background-color: skyblue;
   margin: 100px auto;
   padding: 30px;
+
+  .form-item{
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    label{
+      width: 80px;
+    }
+
+    input{
+      border: unset;
+      height: 30px;
+      padding-left: 5px;
+    }
+
+    button{
+      border: unset;
+      height: 30px;
+      width: 50px;
+      margin-right: 20px;
+      cursor: pointer;
+    }
+  }
 }
 </style>

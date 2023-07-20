@@ -32,9 +32,26 @@ export const contantRoutes=[
   }
 ]
 
+export const dynamicRoutes=[
+  {
+    path:'/about',
+    component:()=>import('@/views/about/index.vue'),
+    meta:{
+      name:'关于'
+    }
+  },
+  {
+    path:'/account',
+    component:()=>import('@/views/account/index.vue'),
+    meta:{
+      name:'个人中心'
+    }
+  }
+]
+
 const router= createRouter({
   history:createWebHistory(),
-  routes: contantRoutes
+  routes: [...contantRoutes,...dynamicRoutes]
 })
 
 export default router

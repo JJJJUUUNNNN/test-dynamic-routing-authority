@@ -1,31 +1,27 @@
 <template>
-  <el-container class="container" style="height: 700px">
-    <el-header style="text-align: right; font-size: 12px">
+    <div class="container">
+      <header style="text-align: right; font-size: 12px">
       <ul class="nav">
         <li @click="router.push('/home')">首页</li>
         <li @click="router.push('/account')">个人中心</li>
         <li @click="router.push('/about')">关于</li>
       </ul>
       <div class="toolbar">
-        <el-dropdown>
+        <!-- <el-dropdown>
           <span>JunJun</span>
           <template #dropdown>
             <el-dropdown-menu>
               <el-dropdown-item @click="router.push('/login')">退出登录</el-dropdown-item>
             </el-dropdown-menu>
           </template>
-        </el-dropdown>
+        </el-dropdown> -->
       </div>
-    </el-header>
-      <el-container class="main-container">
-        <el-main>
-          <el-scrollbar>
-            <slot></slot>
-          </el-scrollbar>
-        </el-main>
-        <el-footer height="30px">Copyright © wangjunjun</el-footer>
-      </el-container>
-  </el-container>
+    </header>
+    <main>
+      <slot></slot>
+    </main>
+    <footer height="30px">Copyright © wangjunjun</footer>
+    </div>
 </template>
 
 <script setup>
@@ -33,34 +29,8 @@ import router from '@/route';
 </script>
 
 <style lang="scss" scoped>
-.container {
-  .el-header {
-    position: relative;
-    background-color: var(--el-color-primary-light-7);
-    color: var(--el-text-color-primary);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .el-aside {
-    color: var(--el-text-color-primary);
-  }
-
-  .el-footer {
-    background-color: #f0f2f5;
-    text-align: center;
-  }
-
-  .el-menu {
-    border-right: none;
-  }
-
-  .el-main {
-    padding: 20px;
-    background-color: #f0f2f5;
-  }
-
+.container{
+ 
   .toolbar {
     display: inline-flex;
     align-items: center;
@@ -86,6 +56,12 @@ import router from '@/route';
       align-items: center;
       cursor: pointer;
     }
+  }
+
+  footer{
+    background-color: #ccc;
+    text-align: center;
+    margin-top: 400px;
   }
 }
 </style>

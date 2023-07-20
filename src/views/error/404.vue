@@ -1,7 +1,7 @@
 <template>
   <div class="error">
     <h1>404</h1>
-    <el-button @click="handleBack" type="primary">返回</el-button>
+    <button @click="handleBack">返回</button>
   </div>
 </template>
 
