@@ -1,4 +1,6 @@
 import { defineStore } from "pinia";
+import { setToken,removeToken } from '@/utils/cookies/index.js'
+import router from "@/router";
 
 export const useUserStore=defineStore({
   id:'user',
@@ -7,15 +9,17 @@ export const useUserStore=defineStore({
     userInfo:null
   }),
   actions:{
-    setToken(token){
+    updateToken(token){
       this.token=token
     },
-    setUserInfo(userInfo){
-      this.userInfo=userInfo
+    async login(){
+      const myToken='test-token-key-lalala'
+      setToken(myToken)
+      this.updateToken(myToken)
+      router.push("/home");
     },
     async logout(){
-
+      removeToken()
     }
   },
-  // persist:true
 })

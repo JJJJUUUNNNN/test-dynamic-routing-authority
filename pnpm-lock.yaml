@@ -4,6 +4,7 @@ specifiers:
   '@element-plus/icons-vue': ^2.1.0
   '@vitejs/plugin-vue': ^4.2.3
   element-plus: ^2.3.7
+  js-cookie: ^3.0.5
   pinia: ^2.1.4
   sass: ^1.63.6
   unplugin-auto-import: ^0.16.6
@@ -16,6 +17,7 @@ specifiers:
 dependencies:
   '@element-plus/icons-vue': 2.1.0_vue@3.3.4
   element-plus: 2.3.7_vue@3.3.4
+  js-cookie: 3.0.5
   pinia: 2.1.4_vue@3.3.4
   vue: 3.3.4
   vue-router: 4.2.4_vue@3.3.4
@@ -750,6 +752,11 @@ packages:
   /isexe/2.0.0:
     resolution: {integrity: sha512-RHxMLp9lnKHGHRng9QFhRCMbYAcVpn69smSGcq3f36xjgVVWThj4qqLbTLlq7Ssj8B+fIQ1EuCEGI2lKsyQeIw==}
     dev: true
+
+  /js-cookie/3.0.5:
+    resolution: {integrity: sha512-cEiJEAEoIbWfCZYKWhVwFuvPX1gETRYPw6LlaTKoxD3s2AkXzkCjnp6h0V77ozyqj0jakteJ4YqDJT830+lVGw==}
+    engines: {node: '>=14'}
+    dev: false
 
   /jsonc-parser/3.2.0:
     resolution: {integrity: sha512-gfFQZrcTc8CnKXp6Y4/CBT3fTc0OVuDofpre4aEeEpSBPV5X5v4+Vmx+8snU7RLPrNHPKSgLxGo9YuQzz20o+w==}

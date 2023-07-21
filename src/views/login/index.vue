@@ -39,14 +39,14 @@
 </template>
 
 <script setup>
-import router from "@/route";
+import router from "@/router";
 import { useUserStore } from '@/store'
 
 const userSore=useUserStore()
 
 const formData = ref({
-  userName: "",
-  password: "",
+  userName: "test",
+  password: "123456",
 });
 
 const formRef = ref();
@@ -61,10 +61,7 @@ const rules = ref({
 
 function handleLogin(e) {
   e.preventDefault()
-  userSore.setToken('token-test-key')
-  setTimeout(() => {
-    router.push("/home");
-  }, 1000);
+  userSore.login()
 }
 
 function handleRegister() {

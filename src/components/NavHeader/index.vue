@@ -1,0 +1,118 @@
+<template>
+  <header>
+    <div class="logo">
+      <img src="@/assets/logo.png" alt="my logo" />
+    </div>
+    <ul class="nav">
+      <li>
+        <a href="/">首页</a>
+      </li>
+      <li>
+        <a href="/account">个人中心</a>
+      </li>
+      <li>
+        <a href="/about">关于</a>
+      </li>
+    </ul>
+    <div class="user" @click="isShow=!isShow">
+      <img src="@/assets/user.png" alt="user" />
+      <span>junjun</span>
+      <ul v-if="isShow" class="dropdown">
+        <li>
+          <router-link to="/change-password">修改密码</router-link>
+        </li>
+        <li>
+          <a href="#" @click="logout">退出登录</a>
+        </li>
+      </ul>
+    </div>
+  </header>
+</template>
+
+<script setup>
+import { useUserStore } from '@/store'
+
+const userSore=useUserStore()
+
+const isShow=ref(false)
+function logout(){
+  userSore.logout()
+}
+</script>
+
+<style lang="scss" scoped>
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 2px solid #ccc;
+  padding: 10px;
+
+  .logo {
+    width: 150px;
+
+    img {
+      width: 100%;
+      height: 52px;
+      cursor: pointer;
+    }
+  }
+
+  .nav {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 600px;
+    height: 52px;
+    color: #000;
+    font-size: 16px;
+
+    li {
+      list-style: none;
+      padding: 5px;
+      margin-right: 5px;
+
+      a {
+        text-decoration: none;
+        color: #000;
+      }
+    }
+  }
+
+  .user {
+    position: relative;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+
+    img {
+      margin-right: 10px;
+      border-radius: 50%;
+    }
+  }
+
+  .dropdown {
+    position: absolute;
+    bottom: -74px;
+    left: 5px;
+    list-style: none;
+    background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+
+    li{
+      margin: 10px;
+
+      a{
+        text-decoration: none;
+        color: #000;
+        font-size: 14px;
+      }
+    }
+  }
+}
+</style>

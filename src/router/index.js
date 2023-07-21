@@ -45,7 +45,7 @@ export const dynamicRoutes=[
     component:()=>import('@/views/account/index.vue'),
     meta:{
       name:'个人中心'
-    }
+    },
   }
 ]
 

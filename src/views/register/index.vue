@@ -26,7 +26,7 @@
 </template>
 
 <script setup>
-import router from '../../route';
+import router from '../../router';
 
 const formData = ref({
   name: '',

@@ -1,12 +1,13 @@
 <template>
   <div class="error">
     <h1>404</h1>
+    <p>页面不见了</p>
     <button @click="handleBack">返回</button>
   </div>
 </template>
 
 <script setup>
-import router from '@/route';
+import router from '@/router';
 
 
 function handleBack(){
