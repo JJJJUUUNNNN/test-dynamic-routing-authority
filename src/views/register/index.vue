@@ -62,7 +62,7 @@ function handleSubmit(){
 <style lang="scss">
 .login{
   width: 250px;
-  height: 150px;
+  height: 200px;
   background-color: skyblue;
   margin: 100px auto;
   padding: 30px;

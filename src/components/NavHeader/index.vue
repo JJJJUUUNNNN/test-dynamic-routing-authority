@@ -22,7 +22,7 @@
           <router-link to="/change-password">修改密码</router-link>
         </li>
         <li>
-          <a href="/login" @click="logout">退出登录</a>
+          <button @click="logout">退出登录</button>
         </li>
       </ul>
     </div>
@@ -30,13 +30,14 @@
 </template>
 
 <script setup>
-import { useUserStore } from '@/store'
+import { useUserStore } from '@/store/modules/user'
+import router from '@/router'
 
-const userSore=useUserStore()
-
-const isShow=ref(false)
+const userStore = useUserStore()
+const isShow=ref(false) 
 function logout(){
-  userSore.logout()
+  userStore.logout()
+  router.replace('/login')
 }
 </script>
 
