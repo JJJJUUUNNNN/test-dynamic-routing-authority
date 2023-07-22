@@ -10,6 +10,9 @@
 
 <script setup>
 import NavHeader from '@/components/NavHeader/index.vue'
+defineOptions({
+  name:'LayoutView'
+})
 </script>
 
 <style lang="scss" scoped>

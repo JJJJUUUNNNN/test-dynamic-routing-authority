@@ -35,6 +35,9 @@ import router from "@/router";
 
 const userStore = useUserStore();
 const isShow = ref(false);
+defineOptions({
+  name:'LayoutNav'
+})
 function logout() {
   userStore.logout();
   router.replace("/");

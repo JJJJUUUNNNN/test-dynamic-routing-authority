@@ -44,7 +44,7 @@ export const usePermissionStore = defineStore({
       return new Promise((resolve, reject) => {
         this.menus = dynamicRoutes;
         dynamicRoutes.forEach((navigation) => {
-          router.addRoute({
+          router.addRoute('Layout',{
             path: navigation.path,
             name: navigation.url,
             component: () => import(`../../views/${navigation.url}/index.vue`),
