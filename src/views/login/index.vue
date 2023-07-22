@@ -32,9 +32,9 @@
       <span ref="errorRef" aria-live="polite"></span>
       <div class="form-item">
         <button>登录</button>
-        <button @click="handleRegister">注册</button>
       </div>
     </form>
+    <button class="btn-register" @click="handleRegister">注册</button>
   </div>
 </template>
 
@@ -100,6 +100,14 @@ function handleRegister() {
       margin-right: 20px;
       cursor: pointer;
     }
+  }
+
+  .btn-register{
+    border: unset;
+    height: 30px;
+    width: 50px;
+    margin-right: 20px;
+    cursor: pointer;
   }
 }
 </style>

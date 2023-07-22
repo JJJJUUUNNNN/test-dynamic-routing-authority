@@ -9,7 +9,7 @@ router.beforeEach(async (to, from, next) => {
   const userStore = useUserStore();
 
   if (userStore.token!==''||tokenKey) {
-    if (to.path === "/login") {
+    if (to.path === "/login"||to.path === "/register") {
       next("/");
     } else {
       next();

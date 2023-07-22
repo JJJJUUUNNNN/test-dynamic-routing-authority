@@ -5,13 +5,13 @@
     </div>
     <ul class="nav">
       <li>
-        <a href="/">首页</a>
+        <router-link class="nav-item" to="/">首页</router-link>
       </li>
       <li>
-        <a href="/account">个人中心</a>
+        <router-link class="nav-item" to="/account">个人中心</router-link>
       </li>
       <li>
-        <a href="/about">关于</a>
+        <router-link class="nav-item" to="/about">关于</router-link>
       </li>
     </ul>
     <div class="user" @click="isShow=!isShow">
@@ -22,7 +22,7 @@
           <router-link to="/change-password">修改密码</router-link>
         </li>
         <li>
-          <a href="#" @click="logout">退出登录</a>
+          <a href="/login" @click="logout">退出登录</a>
         </li>
       </ul>
     </div>
@@ -77,7 +77,7 @@ header {
       padding: 5px;
       margin-right: 5px;
 
-      a {
+      .nav-item {
         text-decoration: none;
         color: #000;
       }
