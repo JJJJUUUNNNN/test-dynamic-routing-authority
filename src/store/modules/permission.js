@@ -25,7 +25,7 @@ export const dynamicRoutes = [
 const _404 = {
   path: "/:pathMatch(.*)*",
   component: () => import("@/views/error/404.vue"),
-  name:'404',
+  name: "404",
   meta: {
     title: "404",
   },
@@ -36,6 +36,9 @@ export const usePermissionStore = defineStore({
   state: () => ({
     menus: [],
   }),
+  getters: {
+    isGettedMenus: (state) => state.menus.length != 0,
+  },
   actions: {
     generateMenus() {
       return new Promise((resolve, reject) => {

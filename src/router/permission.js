@@ -10,11 +10,13 @@ router.beforeEach(async (to, from, next) => {
     if (to.path === "/login" || to.path === "/register") {
       next("/home");
     } else {
-      // if(是否获取过动态菜单) 没获取过则去获取
-      if (usePermission.menus.length === 0) {
+      // 没获取过则去获取
+      if (!usePermission.isGettedMenus) {
       await  usePermission.generateMenus().then(()=>{
         next({ ...to, replace: true }); // hack方法 确保addRoutes已完成
       })
+
+      // 获取过么直接next
       } else {
         next();
       }

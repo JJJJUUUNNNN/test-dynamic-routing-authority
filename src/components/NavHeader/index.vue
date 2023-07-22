@@ -5,7 +5,7 @@
     </div>
     <ul class="nav">
       <li>
-        <router-link class="nav-item" to="/">首页</router-link>
+        <router-link class="nav-item" to="/home">首页</router-link>
       </li>
       <li>
         <router-link class="nav-item" to="/account">个人中心</router-link>
@@ -14,7 +14,7 @@
         <router-link class="nav-item" to="/about">关于</router-link>
       </li>
     </ul>
-    <div class="user" @click="isShow=!isShow">
+    <div class="user" @click="isShow = !isShow">
       <img src="@/assets/user.png" alt="user" />
       <span>junjun</span>
       <ul v-if="isShow" class="dropdown">
@@ -30,14 +30,15 @@
 </template>
 
 <script setup>
-import { useUserStore } from '@/store/modules/user'
-import router from '@/router'
+import { useUserStore } from "@/store/modules/user";
+import router from "@/router";
 
-const userStore = useUserStore()
-const isShow=ref(false) 
-function logout(){
-  userStore.logout()
-  router.replace('/login')
+const userStore = useUserStore();
+const isShow = ref(false);
+function logout() {
+  userStore.logout();
+  router.replace("/");
+  // location.href = '/';
 }
 </script>
 
@@ -45,6 +46,13 @@ function logout(){
 ul {
   margin: 0;
   padding: 0;
+}
+
+li.active,
+.router-link-exact-active
+{
+  background: blue;
+  color: #fff !important;
 }
 
 header {
@@ -105,10 +113,10 @@ header {
     background-color: #fff;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 
-    li{
+    li {
       margin: 10px;
 
-      a{
+      a {
         text-decoration: none;
         color: #000;
         font-size: 14px;
