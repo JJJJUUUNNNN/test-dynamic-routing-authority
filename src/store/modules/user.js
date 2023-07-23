@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { setToken, removeToken } from '@/utils/cookies/index.js';
+import { setToken, removeToken } from '@/utils/cookies/index';
 import { usePermissionStore } from './permission';
 
 export const useUserStore = defineStore({

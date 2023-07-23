@@ -1,24 +1,24 @@
-import { createRouter, createWebHistory } from "vue-router";
+import { createRouter, createWebHistory } from 'vue-router';
 
 export const contantRoutes = [
   {
-    path: "/",
-    redirect: "/home",
-    name:'Layout',
-    component:()=>import("@/Layout/index.vue")
+    path: '/',
+    redirect: '/home',
+    name: 'Layout',
+    component: () => import('@/Layout/index.vue'),
   },
   {
-    path: "/login",
-    component: () => import("@/views/login/index.vue"),
+    path: '/login',
+    component: () => import('@/views/login/index.vue'),
     meta: {
-      title: "登录",
+      title: '登录',
     },
   },
   {
-    path: "/register",
-    component: () => import("@/views/register/index.vue"),
+    path: '/register',
+    component: () => import('@/views/register/index.vue'),
     meta: {
-      title: "注册",
+      title: '注册',
     },
   },
 ];

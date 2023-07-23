@@ -30,32 +30,32 @@ import router from '../../router';
 
 const formData = ref({
   name: '',
-  password:'',
-  confirmPassword:''
-})
+  password: '',
+  confirmPassword: '',
+});
 
-const formRef=ref()
+const formRef = ref();
 
-const rules=ref({
-  name:[{required:true,message:'用户名不能为空',trigger:'blur'}],
-  password:[{required:true,message:'密码不能为空',trigger:'blur'}],
-  confirmPassword:[{required:true,message:'请再次输入密码',trigger:'blur'}]
-})
+const rules = ref({
+  name: [{ required: true, message: '用户名不能为空', trigger: 'blur' }],
+  password: [{ required: true, message: '密码不能为空', trigger: 'blur' }],
+  confirmPassword: [{ required: true, message: '请再次输入密码', trigger: 'blur' }],
+});
 
-function handleSubmit(){
-  if(!formRef.value){
-    return false
+function handleSubmit() {
+  if (!formRef.value) {
+    return false;
   }
-  formRef.value.validate(validate=>{
-    if(validate){
-      console.log('注册成功，请登录！')
+  formRef.value.validate((validate) => {
+    if (validate) {
+      console.log('注册成功，请登录！');
       setTimeout(() => {
-        router.push('/login')
+        router.push('/login');
       }, 1000);
-    }else{
-      return false
+    } else {
+      return false;
     }
-  })
+  });
 }
 </script>
 

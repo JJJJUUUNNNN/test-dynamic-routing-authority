@@ -23,7 +23,7 @@ const dynamicRoutes = [
   },
 ];
 
-const _404 = {
+const notFoundPage = {
   path: '/:pathMatch(.*)*',
   component: () => import('@/views/error/404.vue'),
   name: '404',
@@ -40,14 +40,14 @@ export const usePermissionStore = defineStore({
   }),
   getters: {
     // 判断是否获取过动态路由
-    isGettedMenus: (state) => state.menus.length != 0,
+    isGettedMenus: (state) => state.menus.length !== 0,
   },
   actions: {
     // 生成动态路由 此处的添加必须添加两个地方!  store中的menus和router中的路由
     //  store的menus只是存了个变量
     // 真正动态菜单应该使用 router.addRoute
     generateMenus() {
-      return new Promise((resolve, reject) => {
+      return new Promise((resolve) => {
         // 1. store的菜单中要存入后台返回的菜单
         this.menus = dynamicRoutes;
         dynamicRoutes.forEach((navigation) => {
@@ -59,7 +59,7 @@ export const usePermissionStore = defineStore({
           });
         });
         // 添加404
-        router.addRoute(_404);
+        router.addRoute(notFoundPage);
         resolve();
       });
     },
@@ -69,7 +69,7 @@ export const usePermissionStore = defineStore({
       this.menus.forEach((navigation) => {
         router.removeRoute(navigation.url);
       });
-      router.removeRoute(_404.name);
+      router.removeRoute(notFoundPage.name);
       this.$reset(); // 此方法可以一举把state中所有变量的值重置为初始值,在此处就等价于 this.menus=[]
     },
   },

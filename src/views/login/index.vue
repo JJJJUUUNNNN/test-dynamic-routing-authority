@@ -9,14 +9,14 @@
 </template>
 
 <script setup>
-import router from "@/router";
-import { useUserStore } from '@/store/modules/user'
+import router from '@/router';
+import { useUserStore } from '@/store/modules/user';
 
 const userStore = useUserStore();
 
 function handleLogin() {
   userStore.login();
-  router.replace("/home");
+  router.replace('/home');
 }
 
 </script>

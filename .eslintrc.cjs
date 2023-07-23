@@ -6,7 +6,7 @@ const path = require('node:path');
 
 module.exports = {
   env: { browser: true, es2021: true, node: true },
-  extends: ['airbnb-base', 'plugin:vue/vue3-essential'],
+  extends: ['airbnb-base', 'plugin:vue/vue3-essential', './.eslintrc-auto-import.json'],
   parserOptions: { ecmaVersion: 'latest', sourceType: 'module' },
   plugins: ['vue'],
   settings: {
@@ -25,5 +25,13 @@ module.exports = {
   rules: {
     'linebreak-style': 'off',
     'no-unused-vars': 'error',
+    'import/prefer-default-export': 'off',
+    'import/no-extraneous-dependencies': 'off',
+    'consistent-return': 'off',
+    'no-console': 0,
+    'max-len': 0,
+
+    // vue
+    'vue/multi-word-component-names': 0,
   },
 };

@@ -9,8 +9,8 @@
 <script setup>
 import router from '@/router';
 
-function handleBack(){
-  router.push('/home')
+function handleBack() {
+  router.push('/home');
 }
 </script>
 

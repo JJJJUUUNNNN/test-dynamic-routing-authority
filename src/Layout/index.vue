@@ -9,10 +9,11 @@
 </template>
 
 <script setup>
-import NavHeader from '@/components/NavHeader/index.vue'
+import NavHeader from '@/components/NavHeader/index.vue';
+
 defineOptions({
-  name:'LayoutView'
-})
+  name: 'LayoutView',
+});
 </script>
 
 <style lang="scss" scoped>

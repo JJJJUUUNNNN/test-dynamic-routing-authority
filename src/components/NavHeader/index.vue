@@ -27,17 +27,17 @@
 </template>
 
 <script setup>
-import { useUserStore } from "@/store/modules/user";
-import router from "@/router";
+import { useUserStore } from '@/store/modules/user';
+import router from '@/router';
 
 const userStore = useUserStore();
 const isShow = ref(false);
 defineOptions({
-  name: "LayoutNav",
+  name: 'LayoutNav',
 });
 function logout() {
   userStore.logout();
-  router.replace("/");
+  router.replace('/');
   /**
    * location.href 表示在当前窗口重定向到新页面，打开并刷新 ，应用所有状态都回到了初始状态。用了这个就不用再单独去logout方法中把store的菜单列表清空。
    */
@@ -45,9 +45,9 @@ function logout() {
 }
 
 const navList = [
-  { url: "/home", name: "首页" },
-  { url: "/account", name: "个人中心" },
-  { url: "/about", name: "关于" },
+  { url: '/home', name: '首页' },
+  { url: '/account', name: '个人中心' },
+  { url: '/about', name: '关于' },
 ];
 </script>
 
