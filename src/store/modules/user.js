@@ -1,14 +1,14 @@
-import { defineStore } from "pinia";
-import { setToken, removeToken } from "@/utils/cookies/index.js";
-import { usePermissionStore } from "./permission";
+import { defineStore } from 'pinia';
+import { setToken, removeToken } from '@/utils/cookies/index.js';
+import { usePermissionStore } from './permission';
 
 export const useUserStore = defineStore({
-  id: "user",
+  id: 'user',
   state: () => ({}),
   actions: {
     // 登录 登录成功后就得给用户设置一个token以表示登录状态进行中
     async login() {
-      const myToken = "test-token-key-wjj";
+      const myToken = 'test-token-key-wjj';
       // 用cookies保存token
       // 设置token
       setToken(myToken);
@@ -17,7 +17,7 @@ export const useUserStore = defineStore({
     async logout() {
       const permissionStore = usePermissionStore();
       // 清空动态路由
-      permissionStore.resetMenu()
+      permissionStore.resetMenu();
       // 移除token
       removeToken();
     },
