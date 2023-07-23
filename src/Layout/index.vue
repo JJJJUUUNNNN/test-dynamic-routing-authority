@@ -2,7 +2,7 @@
   <div class="container">
     <NavHeader></NavHeader>
     <main>
-      <slot></slot>
+      <router-view></router-view>
     </main>
     <footer height="30px">Copyright © wangjunjun</footer>
   </div>

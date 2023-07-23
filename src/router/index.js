@@ -4,6 +4,8 @@ export const contantRoutes = [
   {
     path: "/",
     redirect: "/home",
+    name:'Layout',
+    component:()=>import("@/Layout/index.vue")
   },
   {
     path: "/login",

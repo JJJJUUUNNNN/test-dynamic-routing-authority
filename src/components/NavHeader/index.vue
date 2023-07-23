@@ -4,15 +4,11 @@
       <img src="@/assets/logo.png" alt="my logo" />
     </div>
     <ul class="nav">
-      <li>
+      <li v-for="(item, index) in navList" :key="index">
         <!-- 用a标签 跳转的时候会刷新网页，router-link不会 -->
-        <router-link class="nav-item" to="/home">首页</router-link>
-      </li>
-      <li>
-        <router-link class="nav-item" to="/account">个人中心</router-link>
-      </li>
-      <li>
-        <router-link class="nav-item" to="/about">关于</router-link>
+        <router-link class="nav-item" :to="item.url">{{
+          item.name
+        }}</router-link>
       </li>
     </ul>
     <div class="user" @click="isShow = !isShow">
@@ -37,8 +33,8 @@ import router from "@/router";
 const userStore = useUserStore();
 const isShow = ref(false);
 defineOptions({
-  name:'LayoutNav'
-})
+  name: "LayoutNav",
+});
 function logout() {
   userStore.logout();
   router.replace("/");
@@ -47,6 +43,12 @@ function logout() {
    */
   // location.href = '/';
 }
+
+const navList = [
+  { url: "/home", name: "首页" },
+  { url: "/account", name: "个人中心" },
+  { url: "/about", name: "关于" },
+];
 </script>
 
 <style lang="scss" scoped>
@@ -55,9 +57,7 @@ ul {
   padding: 0;
 }
 
-li.active,
-.router-link-exact-active
-{
+.router-link-exact-active {
   background: blue;
   color: #fff !important;
 }

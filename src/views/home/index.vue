@@ -1,16 +1,10 @@
 <template>
   <div>
-    <Layout>
-      <h1>首页</h1>
-      <input type="text" value="231">
-    </Layout>
+    <h1>首页</h1>
+    <input type="text" value="231" />
   </div>
 </template>
 
-<script setup>
-import Layout from '@/Layout/index.vue'
-</script>
+<script setup></script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

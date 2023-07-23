@@ -1,16 +1,9 @@
 <template>
   <div>
-    <Layout>
-      <h1>关于页面</h1>
-    </Layout>
+    <h1>关于页面</h1>
   </div>
 </template>
 
-<script setup>
-import Layout from '@/Layout/index.vue'
+<script setup></script>
 
-</script>
-
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

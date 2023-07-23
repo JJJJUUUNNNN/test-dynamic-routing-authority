@@ -9,7 +9,6 @@
 <script setup>
 import router from '@/router';
 
-
 function handleBack(){
   router.push('/home')
 }
