@@ -1,6 +1,5 @@
 <template>
   <div class="login">
-
       <div class="form-item">
         <button @click="handleLogin()">登录</button>
       </div>
@@ -12,15 +11,8 @@
 <script setup>
 import router from "@/router";
 import { useUserStore } from '@/store/modules/user'
-import { usePermissionStore } from '@/store/modules/permission'
-
 
 const userStore = useUserStore();
-const permissionStore = usePermissionStore();
-
-
-const a = computed(()=>permissionStore.menus)
-const b = computed(()=>router.getRoutes().map(e=>e.path))
 
 function handleLogin() {
   userStore.login();

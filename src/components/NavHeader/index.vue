@@ -5,6 +5,7 @@
     </div>
     <ul class="nav">
       <li>
+        <!-- 用a标签 跳转的时候会刷新网页，router-link不会 -->
         <router-link class="nav-item" to="/home">首页</router-link>
       </li>
       <li>
@@ -41,6 +42,9 @@ defineOptions({
 function logout() {
   userStore.logout();
   router.replace("/");
+  /**
+   * location.href 表示在当前窗口重定向到新页面，打开并刷新 ，应用所有状态都回到了初始状态。用了这个就不用再单独去logout方法中把store的菜单列表清空。
+   */
   // location.href = '/';
 }
 </script>
