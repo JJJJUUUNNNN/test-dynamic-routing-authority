@@ -30,6 +30,7 @@ module.exports = {
     'consistent-return': 'off',
     'no-console': 0,
     'max-len': 0,
+    'no-shadow': 0,
 
     // vue
     'vue/multi-word-component-names': 0,
