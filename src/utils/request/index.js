@@ -12,17 +12,15 @@
  * @returns
  */
 export function wjjRequest(options) {
-  const { url } = options;
-  const { method } = options;
-  const { onSuccess } = options;
+  const { url, method, onSuccess } = options;
   const xhr = new XMLHttpRequest();
   xhr.onreadystatechange = () => {
-    //
     if (xhr.readyState === 4) {
       if (xhr.status === 200) {
-        console.log('原始', xhr.response);
+        // console.log('原始', xhr.response);
         try {
-          onSuccess(xhr.response);
+          const { response } = xhr;
+          onSuccess(response);
         } catch (error) {
           console.log('error:', error);
         }
@@ -30,20 +28,25 @@ export function wjjRequest(options) {
         console.log('state=', xhr.status);
       }
     } else {
-      console.log(xhr.readyState);
+      // console.log(xhr.readyState);
     }
   };
 
   xhr.open(method, url);
   xhr.responseType = 'json';
   xhr.send();
+
+  // 由于此方法是同步的，所以直接return response是获取不到的，需要使用个回调函数，来把response丢出去
+  // return response;
 }
 
-function zdd(callback) {
-  const a = '1233';
-  callback(a);
-}
+// 根据视频链接获取视频长度
+export function getVideoDuration(url, cb) {
+  const video = document.createElement('video');
+  video.src = url;
 
-zdd((a) => {
-  console.log('a', a);
-});
+  video.onloadedmetadata = () => {
+    console.log('video', video.duration);
+    cb && cb(video.duration);
+  };
+}

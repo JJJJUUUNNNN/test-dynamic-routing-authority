@@ -31,6 +31,8 @@ module.exports = {
     'no-console': 0,
     'max-len': 0,
     'no-shadow': 0,
+    'no-unused-expressions': 0,
+    'arrow-body-style': 0,
 
     // vue
     'vue/multi-word-component-names': 0,
