@@ -34,6 +34,7 @@ module.exports = {
     'no-unused-expressions': 0,
     'arrow-body-style': 0,
     'max-classes-per-file': 0,
+    'no-restricted-syntax': 0,
 
     // vue
     'vue/multi-word-component-names': 0,
