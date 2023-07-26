@@ -5,7 +5,7 @@
     </div>
     <router-link to="/about">about</router-link> -
     <router-link to="/register">注册</router-link>
-    <img :src="base64" alt="">
+    <img :src="base64" alt="" />
   </div>
 </template>
 
@@ -13,6 +13,7 @@
 import router from '@/router';
 import { useUserStore } from '@/store/modules/user';
 import { wjjRequest, getVideoDuration } from '@/utils/request';
+import { WjjPromise } from '@/utils/promise';
 
 const userStore = useUserStore();
 
@@ -45,19 +46,7 @@ function getLoadedImg(url) {
  * @return {Promise<string>}
  */
 function url2base64(url) {
-  return new Promise((resolve, reject) => {
-    // getLoadedImg(url)
-    //   .then((img) => {
-    //     const canvas = document.createElement('canvas');
-    //     const ctx = canvas.getContext('2d');
-    //     canvas.width = img.width;
-    //     canvas.height = img.height;
-    //     ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-    //     resolve(canvas.toDataURL('image/png'));
-    //   }).catch((e) => {
-    //     console.log('url2base64 catch', e);
-    //     reject(e);
-    //   });
+  return new WjjPromise((resolve, reject) => {
     const canvas = document.createElement('canvas');
     canvas.width = 200;
     canvas.height = 200;
@@ -81,21 +70,38 @@ function url2base64(url) {
 const url = 'http://vue.ruoyi.vip/prod-api/captchaImage';
 const src = ref('');
 
-const canvasRef = ref();
-
-wjjRequest({
-  url,
-  method: 'get',
-  onSuccess(res) {
-    src.value = `data:image/gif;base64,${res.img}`;
-    url2base64(src.value).then((res) => {
-      base64.value = res;
-    });
+wjjRequest(
+  {
+    url,
+    method: 'get',
   },
+).then((res) => {
+  src.value = `data:image/gif;base64,${res.img}`;
+  return url2base64(src.value);
+}).then((res) => {
+  base64.value = res;
+}).catch((err) => {
+  console.log('catch:', err);
 });
 
-getVideoDuration('/demo.mp4');
+// getVideoDuration('/demo.mp4').then((res) => {
+//   console.log('duration', res);
+// }).catch((err) => {
+//   console.log(err);
+// });
 
+// new WjjPromise((resolve, reject) => {
+//   setTimeout(() => {
+//     resolve('成功！！！');
+//   }, 1000);
+// }).then(
+//   (res) => {
+//     console.log('success:', res);
+//   },
+//   (error) => {
+//     console.log('fail:', error);
+//   },
+// );
 </script>
 
 <style lang="scss">

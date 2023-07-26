@@ -33,6 +33,7 @@ module.exports = {
     'no-shadow': 0,
     'no-unused-expressions': 0,
     'arrow-body-style': 0,
+    'max-classes-per-file': 0,
 
     // vue
     'vue/multi-word-component-names': 0,
