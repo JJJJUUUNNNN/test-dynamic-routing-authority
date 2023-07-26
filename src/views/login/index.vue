@@ -12,7 +12,7 @@
 <script setup>
 import router from '@/router';
 import { useUserStore } from '@/store/modules/user';
-import { wjjRequest, getVideoDuration } from '@/utils/request';
+import { wjjRequest } from '@/utils/request';
 import { WjjPromise } from '@/utils/promise';
 
 const userStore = useUserStore();
