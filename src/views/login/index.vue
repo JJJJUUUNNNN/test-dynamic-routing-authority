@@ -2,20 +2,30 @@
   <div class="login">
     <div class="form-item">
       <button @click="handleLogin()">登录</button>
+
+      <button @click="push.error('Something good has been pushed!')">Push</button>
     </div>
     <router-link to="/about">about</router-link> -
     <router-link to="/register">注册</router-link>
-    <img :src="base64" alt="" />
+    <img :src="src" alt="" />
+    <input v-model="code" />
+   <button @click="login()">login</button>
   </div>
 </template>
 
 <script setup>
+import { usePush } from 'notivue';
+
 import router from '@/router';
 import { useUserStore } from '@/store/modules/user';
 import { wjjRequest } from '@/utils/request';
 import { WjjPromise } from '@/utils/promise';
+import { getToken } from '@/utils/cookies';
 
+const code = ref('');
+const uuid = ref('');
 const userStore = useUserStore();
+const push = usePush();
 
 function handleLogin() {
   userStore.login();
@@ -35,73 +45,49 @@ function getLoadedImg(url) {
       resolve(img);
     };
     img.onerror = (e) => {
+      console.log('imge:', e);
       reject(e);
     };
     img.src = url;
   });
 }
-/**
- *
- * @param {string} url
- * @return {Promise<string>}
- */
-function url2base64(url) {
-  return new WjjPromise((resolve, reject) => {
-    const canvas = document.createElement('canvas');
-    canvas.width = 200;
-    canvas.height = 200;
 
-    console.time('1 way');
-    getLoadedImg(url)
-      .then(async (img) => {
-        const ctx = canvas.getContext('2d');
-        ctx.drawImage(img, 0, 0, img.width, img.height);
-        return getLoadedImg('/bb.png');
-      })
-      .then((img2) => {
-        const ctx = canvas.getContext('2d');
-        ctx.drawImage(img2, 22, 22, img2.width, img2.height);
-        console.timeEnd('1 way');
-        resolve(canvas.toDataURL('image/png'));
-      });
-  });
+function url2base64(url) {
+  const canvas = document.createElement('canvas');
+  canvas.width = 200;
+  canvas.height = 200;
+  const ctx = canvas.getContext('2d');
+
+  return getLoadedImg(url)
+    .then(async (img) => {
+      ctx.drawImage(img, 0, 0, img.width, img.height);
+      return getLoadedImg('/bb.png');
+    })
+    .then((img2) => {
+      ctx.drawImage(img2, 22, 22, img2.width, img2.height);
+      return canvas.toDataURL('image/png');
+    });
 }
 
-const url = 'http://vue.ruoyi.vip/prod-api/captchaImage';
+// const url = 'http://vue.ruoyi.vip/prod-api/captchaImage';
 const src = ref('');
 
 wjjRequest(
   {
-    url,
+    url: '/captchaImage',
     method: 'get',
+
   },
 ).then((res) => {
   src.value = `data:image/gif;base64,${res.img}`;
-  return url2base64(src.value);
-}).then((res) => {
+  uuid.value = res.uuid;
   base64.value = res;
-}).catch((err) => {
-  console.log('catch:', err);
 });
 
-// getVideoDuration('/demo.mp4').then((res) => {
-//   console.log('duration', res);
-// }).catch((err) => {
-//   console.log(err);
-// });
+function login() {
 
-// new WjjPromise((resolve, reject) => {
-//   setTimeout(() => {
-//     resolve('成功！！！');
-//   }, 1000);
-// }).then(
-//   (res) => {
-//     console.log('success:', res);
-//   },
-//   (error) => {
-//     console.log('fail:', error);
-//   },
-// );
+}
+
 </script>
 
 <style lang="scss">
