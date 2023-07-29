@@ -1,11 +1,13 @@
 import router from '@/router';
 import { usePermissionStore } from '@/store/modules/permission';
+import { useUserStore } from '@/store/modules/user';
 import { getToken } from '@/utils/cookies';
 
 const whiteList = ['/login', '/register', '/404'];
 
 router.beforeEach(async (to, from, next) => {
-  const usePermission = usePermissionStore();
+  const permissionStore = usePermissionStore();
+  const userStore = useUserStore();
   /**
    * 路由拦截逻辑：
    * 1. 判断有没有token：
@@ -18,14 +20,21 @@ router.beforeEach(async (to, from, next) => {
   if (getToken()) {
     if (to.path === '/login' || to.path === '/register') {
       next('/home');
-    } else if (!usePermission.isGettedMenus) {
+    } else if (!permissionStore.isGettedMenus) {
       // 添加动态路由
-      await usePermission.generateMenus().then(() => {
-        // 添加路由的过程和页面渲染过程是同时进行的，所以，当路由添加好的一瞬间，页面可能还没反应过来，从而就会导致页面找不到，打开之后什么都没有的情况，因此就需要把replace设置为true，来让他及时的刷新一次以及时同步好动态路由。
+      await permissionStore.generateMenus()
+        .then(() => {
+          return userStore.getUserInfo();
+        }).then((res) => {
+          console.log(res);
+          return permissionStore.getAsyncRouters();
+        }).then((res) => {
+          // 添加路由的过程和页面渲染过程是同时进行的，所以，当路由添加好的一瞬间，页面可能还没反应过来，从而就会导致页面找不到，打开之后什么都没有的情况，因此就需要把replace设置为true，来让他及时的刷新一次以及时同步好动态路由。
 
-        // 因此,应该写next({ ...to, replace: true }) 而不是next()
-        next({ ...to, replace: true }); // hack方法 确保addRoutes已完成
-      });
+          // 因此,应该写next({ ...to, replace: true }) 而不是next()
+          next({ ...to, replace: true }); // hack方法 确保addRoutes已完成
+          console.log(res);
+        });
 
       // 获取过么直接next
     } else {

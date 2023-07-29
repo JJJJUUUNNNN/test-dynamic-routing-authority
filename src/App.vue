@@ -1,9 +1,12 @@
 <script setup>
-import { Notivue, Notifications } from 'notivue';
+import { usePush, Notivue, Notifications } from 'notivue';
+// # 参考 https://www.naiveui.com/zh-CN/os-theme/components/message
+
+window.$push = usePush();
 </script>
 
 <template>
-  <Notivue v-slot="item">
+  <Notivue #default="item">
     <Notifications :item="item" />
   </Notivue>
 

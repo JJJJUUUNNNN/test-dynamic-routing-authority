@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
 import router from '@/router';
+import { getRouters } from '@/api/permission';
 
 // 模拟后台返回的菜单json
 const dynamicRoutes = [
@@ -37,6 +38,7 @@ export const usePermissionStore = defineStore({
   state: () => ({
     // 存动态路由
     menus: [],
+    asyncMenus: [],
   }),
   getters: {
     // 判断是否获取过动态路由
@@ -71,6 +73,12 @@ export const usePermissionStore = defineStore({
       });
       router.removeRoute(notFoundPage.name);
       this.$reset(); // 此方法可以一举把state中所有变量的值重置为初始值,在此处就等价于 this.menus=[]
+    },
+    getAsyncRouters() {
+      return getRouters().then((res) => {
+        this.asyncMenus = res.data;
+        return res;
+      });
     },
   },
 });

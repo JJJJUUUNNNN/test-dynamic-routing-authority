@@ -1,8 +1,16 @@
 import { wjjRequest } from '@/utils/request';
 
-export function login() {
-  wjjRequest({
-    url: 'http://vue.ruoyi.vip/prod-api/captchaImage',
+export function getCaptchaImage() {
+  return wjjRequest({
+    url: '/captchaImage',
     method: 'get',
+  });
+}
+
+export function getLogin(data) {
+  return wjjRequest({
+    url: '/login',
+    method: 'post',
+    data,
   });
 }

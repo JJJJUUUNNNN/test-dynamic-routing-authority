@@ -3,6 +3,8 @@
 /* eslint-disable no-alert */
 // http://vue.ruoyi.vip/prod-api/captchaImage
 
+import { getToken } from '../cookies';
+
 // 使用 XMLHttpRequest 封装一个简单的请求
 // 区分原生状态码和自定义状态码:
 /**
@@ -31,7 +33,7 @@ function addBaseUrl(url) {
   } else {
     finalUrl = baseUrl + url;
   }
-  return finalUrl; // `${(url.startsWith('http') || url.startsWith('https')) ? baseUrl : ''}${url}`;
+  return finalUrl;
 }
 
 function getErrMsgByNativeStatus(status) {
@@ -83,6 +85,7 @@ function getErrMsgByCode(code) {
   let errMessage = '';
   switch (code) {
     case 401:
+      // 没有token
       errMessage = '认证失败，无法访问系统资源';
       break;
     case 403:
@@ -96,6 +99,7 @@ function getErrMsgByCode(code) {
   }
   return errMessage;
 }
+
 /**
  * @param {{url:string;method:string;}} options
  * @return {Promise<Object>}
@@ -124,7 +128,11 @@ export function wjjRequest(options) {
               } else {
                 const errMsg = getErrMsgByCode(response.code);
 
-                throw new Error(errMsg);
+                if (response.msg) {
+                  throw new Error(response.msg);
+                } else {
+                  throw new Error(errMsg);
+                }
               }
             } else {
               const errMsg = getErrMsgByNativeStatus(xhr.status);
@@ -132,6 +140,8 @@ export function wjjRequest(options) {
               throw new Error(errMsg);
             }
           } catch (error) {
+            console.log(error);
+            $push.error(error.message || '发生错误！');
             // alert((error || {}).message || '发生错误！');
             reject(error);
           }
@@ -150,6 +160,8 @@ export function wjjRequest(options) {
       function setHeaders() {
         const defaultHeaders = {
           'Content-Type': 'application/json',
+          // 设置token
+          Authorization: `Bearer ${getToken()}`,
           ...headers,
         };
 

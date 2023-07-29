@@ -1,15 +1,29 @@
 <template>
   <div class="login">
     <div class="form-item">
-      <button @click="handleLogin()">登录</button>
-
-      <button @click="push.error('Something good has been pushed!')">Push</button>
+      <label for="username">用户名：</label>
+      <input v-model="data.username" name="username" />
     </div>
-    <router-link to="/about">about</router-link> -
-    <router-link to="/register">注册</router-link>
-    <img :src="src" alt="" />
-    <input v-model="code" />
-   <button @click="login()">login</button>
+    <div class="form-item">
+      <label for="password">密码：</label>
+      <input v-model="data.password" name="password" />
+    </div>
+    <div class="form-item">
+      <label for="code">验证码：</label>
+      <input v-model="data.code" />
+    </div>
+    <img :src="src" alt="" @click="getCode()" />
+    <div class="form-item">
+      <button @click="handleLogin()">登录</button>
+      <button @click="push.error('Something good has been pushed!')">
+        Push
+      </button>
+    </div>
+
+    <div class="form-item">
+      <router-link to="/about">about</router-link> -
+      <router-link to="/register">注册</router-link>
+    </div>
   </div>
 </template>
 
@@ -18,18 +32,21 @@ import { usePush } from 'notivue';
 
 import router from '@/router';
 import { useUserStore } from '@/store/modules/user';
-import { wjjRequest } from '@/utils/request';
-import { WjjPromise } from '@/utils/promise';
-import { getToken } from '@/utils/cookies';
+import { getCaptchaImage } from '@/api/login';
 
-const code = ref('');
-const uuid = ref('');
 const userStore = useUserStore();
 const push = usePush();
+const data = ref({
+  username: 'admin',
+  password: 'admin123',
+  code: '',
+  uuid: '',
+});
 
 function handleLogin() {
-  userStore.login();
-  router.replace('/home');
+  userStore.login(data.value).then((res) => {
+    router.replace('/home');
+  });
 }
 
 const base64 = ref('');
@@ -45,12 +62,15 @@ function getLoadedImg(url) {
       resolve(img);
     };
     img.onerror = (e) => {
-      console.log('imge:', e);
       reject(e);
     };
     img.src = url;
   });
 }
+async function aaa() {
+  const s = getLoadedImg('/bb.png');
+}
+aaa();
 
 function url2base64(url) {
   const canvas = document.createElement('canvas');
@@ -72,28 +92,21 @@ function url2base64(url) {
 // const url = 'http://vue.ruoyi.vip/prod-api/captchaImage';
 const src = ref('');
 
-wjjRequest(
-  {
-    url: '/captchaImage',
-    method: 'get',
-
-  },
-).then((res) => {
-  src.value = `data:image/gif;base64,${res.img}`;
-  uuid.value = res.uuid;
-  base64.value = res;
-});
-
-function login() {
-
+function getCode() {
+  getCaptchaImage().then((res) => {
+    src.value = `data:image/gif;base64,${res.img}`;
+    data.value.uuid = res.uuid;
+    base64.value = res;
+  });
 }
 
+getCode();
 </script>
 
 <style lang="scss">
 .login {
   width: 250px;
-  height: 200px;
+  height: 300px;
   background-color: skyblue;
   margin: 100px auto;
   padding: 30px;
