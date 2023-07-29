@@ -1,9 +1,14 @@
 <template>
   <div class="container">
     <NavHeader></NavHeader>
-    <main>
-      <router-view></router-view>
-    </main>
+    <section>
+      <aside>
+        ????
+      </aside>
+      <main>
+        <router-view></router-view>
+      </main>
+    </section>
     <footer height="30px">Copyright © wangjunjun</footer>
   </div>
 </template>
@@ -17,6 +22,16 @@ defineOptions({
 </script>
 
 <style lang="scss" scoped>
+section{
+  display: flex;
+  aside{
+    width:  200px;
+    border-right: 1px solid;
+  }
+  main{
+    flex: 1;
+  }
+}
 .container {
   footer {
     position: absolute;
