@@ -4,7 +4,7 @@
 // http://vue.ruoyi.vip/prod-api/captchaImage
 
 import { getToken } from '../cookies';
-
+import { getErrMsgByCode, getErrMsgByNativeStatus } from './getErrMsg';
 // 使用 XMLHttpRequest 封装一个简单的请求
 // 区分原生状态码和自定义状态码:
 /**
@@ -36,72 +36,8 @@ function addBaseUrl(url) {
   return finalUrl;
 }
 
-function getErrMsgByNativeStatus(status) {
-  let errMessage = '';
-  switch (status) {
-    case 400:
-      errMessage = '错误的请求';
-      break;
-    case 401:
-      errMessage = '登录状态过期，请重新登录';
-      break;
-    case 403:
-      errMessage = '禁止访问';
-      break;
-    case 404:
-      errMessage = '网络请求错误,未找到该资源!';
-      break;
-    case 405:
-      errMessage = '网络请求错误,请求方法未允许!';
-      break;
-    case 408:
-      errMessage = '网络请求超时!';
-      break;
-    case 500:
-      errMessage = '服务器错误,请联系管理员!';
-      break;
-    case 501:
-      errMessage = '网络未实现!';
-      break;
-    case 502:
-      errMessage = '网络错误!';
-      break;
-    case 503:
-      errMessage = '服务不可用，服务器暂时过载或维护!';
-      break;
-    case 504:
-      errMessage = '网络超时!';
-      break;
-    case 505:
-      errMessage = 'http版本不支持该请求!';
-      break;
-    default:
-      errMessage = '未知错误';
-  }
-  return errMessage;
-}
-
-function getErrMsgByCode(code) {
-  let errMessage = '';
-  switch (code) {
-    case 401:
-      // 没有token
-      errMessage = '认证失败，无法访问系统资源';
-      break;
-    case 403:
-      errMessage = '当前操作没有权限';
-      break;
-    case 404:
-      errMessage = '访问资源不存在';
-      break;
-    default:
-      errMessage = '系统未知错误，请反馈给管理员';
-  }
-  return errMessage;
-}
-
 /**
- * @param {{url:string;method:string;}} options
+ * @param {{url:string;method:string;data?:Record<string,any>;params?:Record<string,any>;headers?:Record<string,any>;responseType?:string;withoutToken?:true}} options
  * @return {Promise<Object>}
  */
 export function wjjRequest(options) {
@@ -113,6 +49,8 @@ export function wjjRequest(options) {
       headers = {},
       responseType = 'json',
       url = '',
+      // 不带token ==》说明该程序 多少接口需要token 少数不需要 不需要token 再设置 withoutToken
+      withoutToken = false,
     } = options;
 
     if (url) {
@@ -160,10 +98,13 @@ export function wjjRequest(options) {
       function setHeaders() {
         const defaultHeaders = {
           'Content-Type': 'application/json',
-          // 设置token
-          Authorization: `Bearer ${getToken()}`,
           ...headers,
         };
+
+        // 设置token
+        if (withoutToken === false) {
+          defaultHeaders.Authorization = `Bearer ${getToken()}`;
+        }
 
         for (const key in defaultHeaders) {
           if (key) {

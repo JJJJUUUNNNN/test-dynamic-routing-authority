@@ -39,7 +39,7 @@ module.exports = {
     'max-classes-per-file': 0,
     'no-restricted-syntax': 0,
     'import/no-unresolved': 0,
-
+    'import/no-cycle': 0,
     // vue
     'vue/multi-word-component-names': 0,
   },

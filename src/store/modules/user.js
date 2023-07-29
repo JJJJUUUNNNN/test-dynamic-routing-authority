@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
 import { setToken, removeToken } from '@/utils/cookies/index';
+// eslint-disable-next-line import/no-cycle
 import { getLogin } from '@/api/login';
 import { getInfo } from '@/api/user';
 import { usePermissionStore } from './permission';

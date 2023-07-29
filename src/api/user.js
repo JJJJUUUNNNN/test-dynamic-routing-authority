@@ -4,5 +4,6 @@ export function getInfo() {
   return wjjRequest({
     url: '/getInfo',
     method: 'get',
+    withoutToken: true,
   });
 }
