@@ -50,6 +50,7 @@ function handleLogin() {
 }
 
 const base64 = ref('');
+
 /**
  *
  * @param {string} url
@@ -58,9 +59,22 @@ const base64 = ref('');
 function getLoadedImg(url) {
   const img = document.createElement('img');
   return new Promise((resolve, reject) => {
-    img.onload = () => {
-      resolve(img);
+    // img.onload = () => {
+    //   console.log('this  ==>', this);
+    //   // resolve(img);
+    // };
+
+    function c() {
+      console.log('this  ==>', this);
+    }
+
+    window.c = c;
+    c();
+
+    img.onload = function () {
+      console.log('this  ==>', this);
     };
+
     img.onerror = (e) => {
       reject(e);
     };
@@ -68,8 +82,9 @@ function getLoadedImg(url) {
   });
 }
 async function aaa() {
-  const s = getLoadedImg('/bb.png');
+  getLoadedImg('/bb.png');
 }
+
 aaa();
 
 function url2base64(url) {

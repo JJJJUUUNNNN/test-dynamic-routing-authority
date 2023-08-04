@@ -40,6 +40,9 @@ module.exports = {
     'no-restricted-syntax': 0,
     'import/no-unresolved': 0,
     'import/no-cycle': 0,
+    'no-plusplus': 0,
+    'no-useless-return': 0,
+    'no-param-reassign': 0,
     // vue
     'vue/multi-word-component-names': 0,
   },
