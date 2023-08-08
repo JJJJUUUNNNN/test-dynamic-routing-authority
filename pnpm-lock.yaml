@@ -17,6 +17,7 @@ specifiers:
   notivue: ^1.1.3
   pinia: ^2.1.4
   sass: ^1.63.6
+  sortablejs: ^1.15.0
   unplugin-auto-import: ^0.16.6
   unplugin-icons: ^0.16.5
   unplugin-vue-components: ^0.25.1
@@ -32,6 +33,7 @@ dependencies:
   js-cookie: 3.0.5
   notivue: 1.1.3
   pinia: 2.1.4_vue@3.3.4
+  sortablejs: 1.15.0
   vue: 3.3.4
   vue-router: 4.2.4_vue@3.3.4
 
@@ -2460,6 +2462,10 @@ packages:
   /signal-exit/3.0.7:
     resolution: {integrity: sha512-wnD2ZE+l+SPC/uoS0vXeE9L1+0wuaMqKlfz9AMUo38JsyLSBWSFcHR1Rri62LZc12vLr1gb3jl7iwQhgwpAbGQ==}
     dev: true
+
+  /sortablejs/1.15.0:
+    resolution: {integrity: sha512-bv9qgVMjUMf89wAvM6AxVvS/4MX3sPeN0+agqShejLU5z5GX4C75ow1O2e5k4L6XItUyAK3gH6AxSbXrOM5e8w==}
+    dev: false
 
   /source-map-js/1.0.2:
     resolution: {integrity: sha512-R0XvVJ9WusLiqTCEiGCmICCMplcCkIwwR11mOSD9CR5u+IXYdiseeEuXCVAjS54zqwkLcPNnmU4OeJ6tUrWhDw==}

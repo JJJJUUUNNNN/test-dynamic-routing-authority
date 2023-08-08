@@ -43,6 +43,8 @@ module.exports = {
     'no-plusplus': 0,
     'no-useless-return': 0,
     'no-param-reassign': 0,
+    'prefer-rest-params': 0,
+
     // vue
     'vue/multi-word-component-names': 0,
   },

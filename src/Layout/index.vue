@@ -2,7 +2,7 @@
   <div class="container">
     <NavHeader></NavHeader>
     <section>
-      <LayoutAside :menu="permissionStore.asyncMenus"></LayoutAside>
+      <!-- <LayoutAside :menu="permissionStore.asyncMenus"></LayoutAside> -->
       <main>
         <router-view></router-view>
       </main>
